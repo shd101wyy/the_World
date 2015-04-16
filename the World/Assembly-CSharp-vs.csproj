@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Code\Block.cs" />
      <Compile Include="Assets\Code\Chunk.cs" />
+     <Compile Include="Assets\Code\ChunkObject.cs" />
      <Compile Include="Assets\Code\ClickOnFaceScript.cs" />
      <Compile Include="Assets\Code\Dirt.cs" />
      <Compile Include="Assets\Code\MeshData.cs" />
