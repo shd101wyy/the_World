@@ -41,10 +41,10 @@ public class MeshData{
 
 
 		// add textures
-		Vector2 _00 = new Vector2( 0f, 480/512f );
-		Vector2 _10 = new Vector2( 32/512f, 480/512f );
-		Vector2 _01 = new Vector2( 0f, 1.0f );
-		Vector2 _11 = new Vector2( 32/512.0f, 1.0f );
+		Vector2 _00 = new Vector2( (32*14)/512f, (15*32)/512f );
+		Vector2 _10 = new Vector2( (32*15)/512f, (15*32)/512f );
+		Vector2 _01 = new Vector2( (32*14)/512f, (16*32)/512f );
+		Vector2 _11 = new Vector2( (32*15)/512f, (16*32)/512f );
 		this.uvs.Add (_11);
 		this.uvs.Add (_01);
 		this.uvs.Add (_00);
@@ -69,10 +69,10 @@ public class MeshData{
 		this.AddQuadTriangles();
 
 		// add textures
-		Vector2 _00 = new Vector2( 0f, 480/512f );
-		Vector2 _10 = new Vector2( 32/512f, 480/512f );
-		Vector2 _01 = new Vector2( 0f, 1.0f );
-		Vector2 _11 = new Vector2( 32/512.0f, 1.0f );
+		Vector2 _00 = new Vector2( 0f, 448/512f );
+		Vector2 _10 = new Vector2( 32/512f, 448/512f );
+		Vector2 _01 = new Vector2( 0f, 480/512f );
+		Vector2 _11 = new Vector2( 32/512.0f, 480/512f );
 		this.uvs.Add (_11);
 		this.uvs.Add (_01);
 		this.uvs.Add (_00);
@@ -97,14 +97,14 @@ public class MeshData{
 		this.AddQuadTriangles();
 
 		// add textures
-		Vector2 _00 = new Vector2( 0f, 480/512f );
-		Vector2 _10 = new Vector2( 32/512f, 480/512f );
-		Vector2 _01 = new Vector2( 0f, 1.0f );
-		Vector2 _11 = new Vector2( 32/512.0f, 1.0f );
+		Vector2 _00 = new Vector2( 96/512f, 480/512f );
+		Vector2 _10 = new Vector2( 128/512f, 480/512f );
+		Vector2 _01 = new Vector2( 96/512f, 512/512f );
+		Vector2 _11 = new Vector2( 128/512.0f, 512/512f );
+		this.uvs.Add (_10);
 		this.uvs.Add (_11);
 		this.uvs.Add (_01);
 		this.uvs.Add (_00);
-		this.uvs.Add (_10);
 	}
 
 	public void FaceDataXNegative(Block block){
@@ -126,14 +126,14 @@ public class MeshData{
 		this.AddQuadTriangles();
 
 		// add textures
-		Vector2 _00 = new Vector2( 0f, 480/512f );
-		Vector2 _10 = new Vector2( 32/512f, 480/512f );
-		Vector2 _01 = new Vector2( 0f, 1.0f );
-		Vector2 _11 = new Vector2( 32/512.0f, 1.0f );
+		Vector2 _00 = new Vector2( 96/512f, 480/512f );
+		Vector2 _10 = new Vector2( 128/512f, 480/512f );
+		Vector2 _01 = new Vector2( 96/512f, 512/512f );
+		Vector2 _11 = new Vector2( 128/512.0f, 512/512f );
+		this.uvs.Add (_10);
 		this.uvs.Add (_11);
 		this.uvs.Add (_01);
 		this.uvs.Add (_00);
-		this.uvs.Add (_10);
 	}
 
 	public void FaceDataZPositive(Block block){
@@ -142,7 +142,7 @@ public class MeshData{
 		this.vertices.Add(new Vector3(block.x - half_block_size, block.y + half_block_size, block.z - half_block_size));
 		this.vertices.Add(new Vector3(block.x + half_block_size, block.y + half_block_size, block.z - half_block_size));
 		this.vertices.Add(new Vector3(block.x + half_block_size, block.y - half_block_size, block.z - half_block_size));
-		
+
 		// add normals
 		Vector3 front = Vector3.forward;
 		this.normals.Add (front);
@@ -154,14 +154,14 @@ public class MeshData{
 		this.AddQuadTriangles();
 
 		// add textures
-		Vector2 _00 = new Vector2( 0f, 480/512f );
-		Vector2 _10 = new Vector2( 32/512f, 480/512f );
-		Vector2 _01 = new Vector2( 0f, 1.0f );
-		Vector2 _11 = new Vector2( 32/512.0f, 1.0f );
+		Vector2 _00 = new Vector2( 96/512f, 480/512f );
+		Vector2 _10 = new Vector2( 128/512f, 480/512f );
+		Vector2 _01 = new Vector2( 96/512f, 512/512f );
+		Vector2 _11 = new Vector2( 128/512.0f, 512/512f );
+		this.uvs.Add (_10);
 		this.uvs.Add (_11);
 		this.uvs.Add (_01);
 		this.uvs.Add (_00);
-		this.uvs.Add (_10);
 	}
 
 	public void FaceDataZNegative(Block block){
@@ -182,14 +182,14 @@ public class MeshData{
 		this.AddQuadTriangles();
 
 		// add textures
-		Vector2 _00 = new Vector2( 0f, 480/512f );
-		Vector2 _10 = new Vector2( 32/512f, 480/512f );
-		Vector2 _01 = new Vector2( 0f, 1.0f );
-		Vector2 _11 = new Vector2( 32/512.0f, 1.0f );
+		Vector2 _00 = new Vector2( 96/512f, 480/512f );
+		Vector2 _10 = new Vector2( 128/512f, 480/512f );
+		Vector2 _01 = new Vector2( 96/512f, 512/512f );
+		Vector2 _11 = new Vector2( 128/512.0f, 512/512f );
+		this.uvs.Add (_10);
 		this.uvs.Add (_11);
 		this.uvs.Add (_01);
 		this.uvs.Add (_00);
-		this.uvs.Add (_10);
 	}
 
 

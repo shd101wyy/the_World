@@ -19,10 +19,10 @@ public class Chunk  {
 	 *  left bottom corner
 	 */
 	public Chunk(int chunk_x, int chunk_z, GameObject chunk_object, World world){
-		Debug.Log ("Init Chunk");
+		//Debug.Log ("Init Chunk");
 		
 		this.size_x = 16; 
-		this.size_y = 64; 
+		this.size_y = 128; 
 		this.size_z = 16;
 
 		this.chunk_object = chunk_object;
@@ -37,7 +37,13 @@ public class Chunk  {
 	}
 	
 	public Block GetBlock(int x, int y, int z){
-		return this.blocks[x, y, z];
+		if (x >= this.size_x || x < 0 || 
+			y >= this.size_y || y < 0 ||
+			z >= this.size_z || z < 0)
+			return null;
+		else {
+			return this.blocks [x, y, z];
+		}
 	}
 	
 	public void SetBlock(Block block, int x, int y, int z){
@@ -65,7 +71,8 @@ public class Chunk  {
 		for(x = 0; x < this.size_x; x++){
 			for(z = 0; z< this.size_z; z++){
 				// Compute a random height
-				float height = 10*Mathf.PerlinNoise((x + chunk_pos_x)/12.0f, (z + chunk_pos_z)/12.0f);
+				int height = (int)(30*Mathf.PerlinNoise(world.perlin_noise_seed + (x + chunk_pos_x) / 50.0f, 
+				                                        world.perlin_noise_seed + (z + chunk_pos_z) / 50.0f));
 				if(height >= this.size_y) // limit
 					height = this.size_y - 10; 
 				
@@ -77,13 +84,18 @@ public class Chunk  {
 					                        block_x, // TODO: X block_size
 					                        block_y,
 					                        block_z, // TODO: X block_size
-					                        this);
+					                        this,
+					                        x,
+					                        y,
+					                        z);
 					this.blocks[x, y, z] = block;
 				}
 				// set empty.
-				for(; y < this.size_y; y++){
+				for(y = height; y < this.size_y; y++){
 					this.blocks[x, y, z] = null;
 				}
+
+				// TODO: draw lowest ground
 			}
 		}
 	}
@@ -103,8 +115,6 @@ public class Chunk  {
 					if(this.blocks[x, y, z] != null){
 						// Debug.Log ("generate mesh");
 						this.blocks[x, y, z].generateMesh(meshdata);
-						
-						
 					}
 				}
 			}
@@ -119,6 +129,8 @@ public class Chunk  {
 		
 		mesh.RecalculateBounds();
 		mesh.Optimize();
+
+		//Debug.Log (this.blocks);
 		
 	}
 

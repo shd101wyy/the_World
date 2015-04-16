@@ -12,10 +12,15 @@ public class Block{
 	// block type 
 	protected Block_Type type;
 
-	// block coordinates
+	// block coordinates in world
 	public int x; 
 	public int y;
 	public int z; 
+
+	// block coordinates in chunk
+	public int chunk_x;
+	public int chunk_y; 
+	public int chunk_z;
 
 	// block size
 	public int block_size; 
@@ -30,7 +35,7 @@ public class Block{
 	public MeshData meshdata;
 
 	// constructor
-	public Block(Block_Type type, int x, int y, int z, Chunk chunk){
+	public Block(Block_Type type, int x, int y, int z, Chunk chunk, int chunk_x, int chunk_y, int chunk_z){
 		// init properties
 		this.type = type;
 		this.x = x; 
@@ -38,16 +43,42 @@ public class Block{
 		this.z = z; 
 		this.chunk = chunk;
 		this.block_size = chunk.world.block_size;
+		this.chunk_x = chunk_x;
+		this.chunk_y = chunk_y; 
+		this.chunk_z = chunk_z;
+	}
+
+	// check whether a block at (chunk_x, chunk_y, chunk_z) is solid
+	public bool isSolid(int chunk_x, int chunk_y, int chunk_z){
+		Block b = this.chunk.GetBlock (chunk_x, chunk_y, chunk_z);
+		if (b == null)
+			return false; 
+		return true;
 	}
 
 	// generate mesh 
 	public void generateMesh(MeshData meshdata){
-		meshdata.FaceDataXNegative (this);
-		meshdata.FaceDataXPositive (this);
-		meshdata.FaceDataYNegative (this);
-		meshdata.FaceDataYPositive (this);
-		meshdata.FaceDataZNegative (this);
-		meshdata.FaceDataZPositive (this);
+		if (isSolid (chunk_x - 1, chunk_y, chunk_z) == false) {
+			meshdata.FaceDataXNegative (this);
+		}
 
+		if (isSolid (chunk_x + 1, chunk_y, chunk_z) == false) {
+			meshdata.FaceDataXPositive (this);
+		}
+		if (isSolid (chunk_x, chunk_y - 1, chunk_z) == false) {
+			meshdata.FaceDataYNegative (this);
+		}
+
+		if (isSolid (chunk_x, chunk_y + 1, chunk_z) == false) {
+			meshdata.FaceDataYPositive (this);
+		}
+
+		if (isSolid (chunk_x, chunk_y, chunk_z + 1) == false) {
+			meshdata.FaceDataZNegative (this);
+		}
+
+		if (isSolid (chunk_x, chunk_y, chunk_z - 1) == false) {
+			meshdata.FaceDataZPositive (this);
+		}
 	}
 }

@@ -16,7 +16,7 @@ using System.Collections;
 public class ChunkObject: MonoBehaviour {
 	// Use this for initialization
 	void Start(){
-		Debug.Log ("Start Chunk Object");
+		//Debug.Log ("Start Chunk Object");
 	}
 	// 
 	void Update(){
