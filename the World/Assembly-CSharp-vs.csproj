@@ -46,8 +46,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Code\Block.cs" />
      <Compile Include="Assets\Code\Chunk.cs" />
      <Compile Include="Assets\Code\ClickOnFaceScript.cs" />
+     <Compile Include="Assets\Code\Dirt.cs" />
+     <Compile Include="Assets\Code\MeshData.cs" />
+     <Compile Include="Assets\Code\World.cs" />
      <Compile Include="Assets\Code\WorldGenerator.cs" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
