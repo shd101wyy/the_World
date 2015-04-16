@@ -52,6 +52,7 @@
      <Compile Include="Assets\Code\ClickOnFaceScript.cs" />
      <Compile Include="Assets\Code\Dirt.cs" />
      <Compile Include="Assets\Code\MeshData.cs" />
+     <Compile Include="Assets\Code\Tile.cs" />
      <Compile Include="Assets\Code\World.cs" />
      <Compile Include="Assets\Code\WorldGenerator.cs" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />

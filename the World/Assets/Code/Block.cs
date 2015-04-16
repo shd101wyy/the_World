@@ -12,7 +12,8 @@ public class Block{
 	// block type 
 	protected Block_Type type;
 
-	// block coordinates in world
+	// block transform relative to chunk.
+	// so its world coordinate should be x + this.chunk.x * chunk_x_size
 	public int x; 
 	public int y;
 	public int z; 
@@ -34,8 +35,11 @@ public class Block{
 	// meshdata
 	public MeshData meshdata;
 
+	// tile 
+	public Tile tile;
+
 	// constructor
-	public Block(Block_Type type, int x, int y, int z, Chunk chunk, int chunk_x, int chunk_y, int chunk_z){
+	public Block(Block_Type type, int x, int y, int z, Chunk chunk, int chunk_x, int chunk_y, int chunk_z, Tile tile){
 		// init properties
 		this.type = type;
 		this.x = x; 
@@ -46,6 +50,7 @@ public class Block{
 		this.chunk_x = chunk_x;
 		this.chunk_y = chunk_y; 
 		this.chunk_z = chunk_z;
+		this.tile = tile;
 	}
 
 	// check whether a block at (chunk_x, chunk_y, chunk_z) is solid

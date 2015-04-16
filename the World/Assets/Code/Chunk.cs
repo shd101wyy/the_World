@@ -20,10 +20,10 @@ public class Chunk  {
 	 */
 	public Chunk(int chunk_x, int chunk_z, GameObject chunk_object, World world){
 		//Debug.Log ("Init Chunk");
-		
-		this.size_x = 16; 
-		this.size_y = 128; 
-		this.size_z = 16;
+
+		this.size_x = world.chunk_size_x; 
+		this.size_y = world.chunk_size_y; 
+		this.size_z = world.chunk_size_z;
 
 		this.chunk_object = chunk_object;
 		this.world = world;
@@ -74,12 +74,12 @@ public class Chunk  {
 				int height = (int)(30*Mathf.PerlinNoise(world.perlin_noise_seed + (x + chunk_pos_x) / 50.0f, 
 				                                        world.perlin_noise_seed + (z + chunk_pos_z) / 50.0f));
 				if(height >= this.size_y) // limit
-					height = this.size_y - 10; 
+					height = this.size_y - 1; 
 				
 				for (y = 0; y < height; y++){
-					int block_x = (x + chunk_pos_x) * block_size;
+					int block_x = (x /*+ chunk_pos_x*/) * block_size;
 					int block_y = y * block_size;
-					int block_z = (z + chunk_pos_z) * block_size;
+					int block_z = (z /*+ chunk_pos_z*/) * block_size;
 					Block block = new Block(Block_Type.DIRT, 
 					                        block_x, // TODO: X block_size
 					                        block_y,
@@ -87,7 +87,8 @@ public class Chunk  {
 					                        this,
 					                        x,
 					                        y,
-					                        z);
+					                        z,
+					                        world.dirt_tile);
 					this.blocks[x, y, z] = block;
 				}
 				// set empty.
@@ -124,11 +125,20 @@ public class Chunk  {
 		mesh.normals = meshdata.normals.ToArray ();
 		mesh.uv = meshdata.uvs.ToArray();
 		mesh.triangles = meshdata.triangles.ToArray();
-		
-		
-		
+
 		mesh.RecalculateBounds();
 		mesh.Optimize();
+
+		// collision
+		MeshCollider coll = this.chunk_object.GetComponent<MeshCollider> ();
+		coll.sharedMesh = null; 
+		Mesh coll_mesh = new Mesh(); 
+		coll_mesh.vertices = meshdata.colVertices.ToArray();
+		coll_mesh.triangles = meshdata.colTriangles.ToArray();
+		coll_mesh.RecalculateNormals();
+		coll.sharedMesh = coll_mesh;
+		
+
 
 		//Debug.Log (this.blocks);
 		
