@@ -13,12 +13,12 @@ public class Block{
 	protected Block_Type type;
 
 	// block coordinates
-	protected int x; 
-	protected int y;
-	protected int z; 
+	public int x; 
+	public int y;
+	public int z; 
 
 	// block size
-	protected int block_size; 
+	public int block_size; 
 	
 
 	// chunk 
@@ -40,12 +40,14 @@ public class Block{
 		this.block_size = chunk.world.block_size;
 	}
 
-	// render 
-	public MeshData generateMesh(){
-		this.meshdata = new MeshData (this.x, 
-		                         this.y,
-		                         this.z,
-		                         this.block_size);
-		return this.meshdata;
+	// generate mesh 
+	public void generateMesh(MeshData meshdata){
+		meshdata.FaceDataXNegative (this);
+		meshdata.FaceDataXPositive (this);
+		meshdata.FaceDataYNegative (this);
+		meshdata.FaceDataYPositive (this);
+		meshdata.FaceDataZNegative (this);
+		meshdata.FaceDataZPositive (this);
+
 	}
 }

@@ -1,39 +1,212 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MeshData{
 
 	// mesh properties
-	public Vector3[] vertices;
-	public Vector3[] normals;
-	public Vector2[] uvs;
-	public int[] triangles;
+	public List<Vector3> vertices; //Vector3[] vertices;
+	public List<Vector3> normals;  //Vector3[] normals;
+	public List<Vector2> uvs;      //Vector2[] uvs;
+	public List<int> triangles;    //int[] triangles;
 
 
-	// location
-	private int x;
-	private int y;
-	private int z;
 
-	// block size
-	private int block_size;
 
 	// constructor
-	public MeshData(int x, int y, int z, int block_size){
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		this.block_size = block_size; 
-
-		this.vertices = getVertices ();
-		this.normals = getNormals ();
-		this.uvs = getUVs ();
-		this.triangles = getTriangles ();
+	public MeshData(){
+		this.vertices = new List<Vector3> ();
+		this.normals = new List<Vector3>();
+		this.uvs = new List<Vector2>();
+		this.triangles = new List<int>();
 	}
 
+	public void FaceDataYPositive(Block block){
+		float half_block_size = block.block_size / 2.0f;
+		this.vertices.Add(new Vector3(block.x - half_block_size, block.y + half_block_size, block.z + half_block_size));
+		this.vertices.Add(new Vector3(block.x + half_block_size, block.y + half_block_size, block.z + half_block_size));
+		this.vertices.Add(new Vector3(block.x + half_block_size, block.y + half_block_size, block.z - half_block_size));
+		this.vertices.Add(new Vector3(block.x - half_block_size, block.y + half_block_size, block.z - half_block_size));
+
+		// add normals
+		Vector3 up = Vector3.up;
+		this.normals.Add (up);
+		this.normals.Add (up);
+		this.normals.Add (up);
+		this.normals.Add (up);
+
+
+		// add triangles
+		this.AddQuadTriangles();
+
+
+		// add textures
+		Vector2 _00 = new Vector2( 0f, 480/512f );
+		Vector2 _10 = new Vector2( 32/512f, 480/512f );
+		Vector2 _01 = new Vector2( 0f, 1.0f );
+		Vector2 _11 = new Vector2( 32/512.0f, 1.0f );
+		this.uvs.Add (_11);
+		this.uvs.Add (_01);
+		this.uvs.Add (_00);
+		this.uvs.Add (_10);
+	}
+
+	public void FaceDataYNegative(Block block){
+		float half_block_size = block.block_size / 2.0f;
+		this.vertices.Add(new Vector3(block.x - half_block_size, block.y - half_block_size, block.z - half_block_size));
+		this.vertices.Add(new Vector3(block.x + half_block_size, block.y - half_block_size, block.z - half_block_size));
+		this.vertices.Add(new Vector3(block.x + half_block_size, block.y - half_block_size, block.z + half_block_size));
+		this.vertices.Add(new Vector3(block.x - half_block_size, block.y - half_block_size, block.z + half_block_size));
+
+		// add normals
+		Vector3 down = Vector3.down;
+		this.normals.Add (down);
+		this.normals.Add (down);
+		this.normals.Add (down);
+		this.normals.Add (down);
+
+		// add triangles
+		this.AddQuadTriangles();
+
+		// add textures
+		Vector2 _00 = new Vector2( 0f, 480/512f );
+		Vector2 _10 = new Vector2( 32/512f, 480/512f );
+		Vector2 _01 = new Vector2( 0f, 1.0f );
+		Vector2 _11 = new Vector2( 32/512.0f, 1.0f );
+		this.uvs.Add (_11);
+		this.uvs.Add (_01);
+		this.uvs.Add (_00);
+		this.uvs.Add (_10);
+	}
+
+	public void FaceDataXPositive(Block block){
+		float half_block_size = block.block_size / 2.0f;
+		this.vertices.Add(new Vector3(block.x + half_block_size, block.y - half_block_size, block.z - half_block_size));
+		this.vertices.Add(new Vector3(block.x + half_block_size, block.y + half_block_size, block.z - half_block_size));
+		this.vertices.Add(new Vector3(block.x + half_block_size, block.y + half_block_size, block.z + half_block_size));
+		this.vertices.Add(new Vector3(block.x + half_block_size, block.y - half_block_size, block.z + half_block_size));
+		
+		// add normals
+		Vector3 right = Vector3.right;
+		this.normals.Add (right);
+		this.normals.Add (right);
+		this.normals.Add (right);
+		this.normals.Add (right);
+		
+		// add triangles
+		this.AddQuadTriangles();
+
+		// add textures
+		Vector2 _00 = new Vector2( 0f, 480/512f );
+		Vector2 _10 = new Vector2( 32/512f, 480/512f );
+		Vector2 _01 = new Vector2( 0f, 1.0f );
+		Vector2 _11 = new Vector2( 32/512.0f, 1.0f );
+		this.uvs.Add (_11);
+		this.uvs.Add (_01);
+		this.uvs.Add (_00);
+		this.uvs.Add (_10);
+	}
+
+	public void FaceDataXNegative(Block block){
+		float half_block_size = block.block_size / 2.0f;
+		this.vertices.Add(new Vector3(block.x - half_block_size, block.y - half_block_size, block.z + half_block_size));
+		this.vertices.Add(new Vector3(block.x - half_block_size, block.y + half_block_size, block.z + half_block_size));
+		this.vertices.Add(new Vector3(block.x - half_block_size, block.y + half_block_size, block.z - half_block_size));
+		this.vertices.Add(new Vector3(block.x - half_block_size, block.y - half_block_size, block.z - half_block_size));
+
+
+		// add normals
+		Vector3 left = Vector3.left;
+		this.normals.Add (left);
+		this.normals.Add (left);
+		this.normals.Add (left);
+		this.normals.Add (left);
+
+		// add triangles
+		this.AddQuadTriangles();
+
+		// add textures
+		Vector2 _00 = new Vector2( 0f, 480/512f );
+		Vector2 _10 = new Vector2( 32/512f, 480/512f );
+		Vector2 _01 = new Vector2( 0f, 1.0f );
+		Vector2 _11 = new Vector2( 32/512.0f, 1.0f );
+		this.uvs.Add (_11);
+		this.uvs.Add (_01);
+		this.uvs.Add (_00);
+		this.uvs.Add (_10);
+	}
+
+	public void FaceDataZPositive(Block block){
+		float half_block_size = block.block_size / 2.0f;
+		this.vertices.Add(new Vector3(block.x - half_block_size, block.y - half_block_size, block.z - half_block_size));
+		this.vertices.Add(new Vector3(block.x - half_block_size, block.y + half_block_size, block.z - half_block_size));
+		this.vertices.Add(new Vector3(block.x + half_block_size, block.y + half_block_size, block.z - half_block_size));
+		this.vertices.Add(new Vector3(block.x + half_block_size, block.y - half_block_size, block.z - half_block_size));
+		
+		// add normals
+		Vector3 front = Vector3.forward;
+		this.normals.Add (front);
+		this.normals.Add (front);
+		this.normals.Add (front);
+		this.normals.Add (front);
+		
+		// add triangles
+		this.AddQuadTriangles();
+
+		// add textures
+		Vector2 _00 = new Vector2( 0f, 480/512f );
+		Vector2 _10 = new Vector2( 32/512f, 480/512f );
+		Vector2 _01 = new Vector2( 0f, 1.0f );
+		Vector2 _11 = new Vector2( 32/512.0f, 1.0f );
+		this.uvs.Add (_11);
+		this.uvs.Add (_01);
+		this.uvs.Add (_00);
+		this.uvs.Add (_10);
+	}
+
+	public void FaceDataZNegative(Block block){
+		float half_block_size = block.block_size / 2.0f;
+		this.vertices.Add(new Vector3(block.x + half_block_size, block.y - half_block_size, block.z + half_block_size));
+		this.vertices.Add(new Vector3(block.x + half_block_size, block.y + half_block_size, block.z + half_block_size));
+		this.vertices.Add(new Vector3(block.x - half_block_size, block.y + half_block_size, block.z + half_block_size));
+		this.vertices.Add(new Vector3(block.x - half_block_size, block.y - half_block_size, block.z + half_block_size));
+		
+		// add normals
+		Vector3 back = Vector3.back;
+		this.normals.Add (back);
+		this.normals.Add (back);
+		this.normals.Add (back);
+		this.normals.Add (back);
+		
+		// add triangles
+		this.AddQuadTriangles();
+
+		// add textures
+		Vector2 _00 = new Vector2( 0f, 480/512f );
+		Vector2 _10 = new Vector2( 32/512f, 480/512f );
+		Vector2 _01 = new Vector2( 0f, 1.0f );
+		Vector2 _11 = new Vector2( 32/512.0f, 1.0f );
+		this.uvs.Add (_11);
+		this.uvs.Add (_01);
+		this.uvs.Add (_00);
+		this.uvs.Add (_10);
+	}
+
+
+	// add triangles
+	public void AddQuadTriangles(){
+		triangles.Add(vertices.Count - 4);
+		triangles.Add(vertices.Count - 3);
+		triangles.Add(vertices.Count - 2);
+		
+		triangles.Add(vertices.Count - 4);
+		triangles.Add(vertices.Count - 2);
+		triangles.Add(vertices.Count - 1);
+	}
 	/**
 	 *  return vertices coordinate for cube
 	 */
+	/*
 	public Vector3[] getVertices(){
 		float length = this.block_size;
 		float width = this.block_size;
@@ -72,11 +245,12 @@ public class MeshData{
 		};
 		#endregion
 		return vertices;
-	}
+	}*/
 
 	/**
 	 *  return cube normals
 	 */
+	/*
 	public Vector3[] getNormals(){
 		#region Normales
 		Vector3 up 	= Vector3.up;
@@ -109,12 +283,13 @@ public class MeshData{
 		#endregion
 		return normales;
 	}
-
+*/
 	/**
 	 * return cube uvs 
 	 */
-	public Vector2[] getUVs(){
-		#region UVs
+
+	//public Vector2[] getUVs(){
+	//	#region UVs
 		/**
 		Vector2 _00 = new Vector2( 0f, 0f );
 		Vector2 _10 = new Vector2( 1f, 1f );
@@ -130,6 +305,7 @@ public class MeshData{
 		 * 
 		 * Attention: UV coordinate starts from left bottom corner instead of left top corner!!
 		 */
+	/*
 		Vector2 _00 = new Vector2( 0f, 480/512f );
 		Vector2 _10 = new Vector2( 32/512f, 480/512f );
 		Vector2 _01 = new Vector2( 0f, 1.0f );
@@ -156,8 +332,9 @@ public class MeshData{
 		};
 		#endregion
 		return uvs;
-	}
+	}*/
 
+	/*
 	public int[] getTriangles(){
 		
 		#region Triangles
@@ -191,5 +368,5 @@ public class MeshData{
 		#endregion
 		return triangles;
 	}
-
+*/
 }
