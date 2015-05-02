@@ -26,20 +26,20 @@ public class World : MonoBehaviour {
 
 
 		// initialize tile texture
-		/*dirt_tile = new Tile (3, 15,
+		dirt_tile = new Tile (3, 15,
 		                      3, 15,
 		                      14, 15,
 		                      2, 15,
 		                      3, 15,
 		                      3, 15);
-		                      */
+		/*
 		dirt_tile = new Tile (0, 14,
 		                      0, 14,
 		                      0, 14,
 		                      0, 14,
 		                      0, 14,
 		                      0, 14);
-
+*/
 
 		// begin to generate terrain
 		StartCoroutine (SimpleGenerator ()); 	
