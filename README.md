@@ -1,7 +1,9 @@
 #### The World
 ##### A simple game written in Unity3d  
-  
-#####reference:
+
+##### Useful video:
+- https://www.youtube.com/watch?v=4hVAzRahcdY
+##### reference:
 - http://forum.unity3d.com/threads/tutorial-procedural-meshes-and-voxel-terrain-c.198651/
 - http://alexstv.com/index.php/category/voxels
 - http://in2gpu.com/category/game-development/unity/
