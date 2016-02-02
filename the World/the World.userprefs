@@ -1,15 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/World.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../../Lectures/cs498 virtual reality/cs498-mp/mp1/Assets/OVR/Scripts/OVRCameraRig.cs">
     <Files>
-      <File FileName="Assets/Code/MeshData.cs" Line="223" Column="16" />
-      <File FileName="Assets/Code/World.cs" Line="42" Column="3" />
-      <File FileName="Assets/Code/ChunkObject.cs" Line="22" Column="16" />
-      <File FileName="Assets/Code/Chunk.cs" Line="137" Column="46" />
-      <File FileName="Assets/Code/Block.cs" Line="6" Column="8" />
-      <File FileName="Assets/Code/WorldGenerator.cs" Line="38" Column="36" />
-      <File FileName="Assets/Code/ClickOnFaceScript.cs" Line="35" Column="4" />
-      <File FileName="Assets/Code/Tile.cs" Line="50" Column="25" />
+      <File FileName="../../../Lectures/cs498 virtual reality/cs498-mp/mp1/Assets/OVR/Scripts/OVRCameraRig.cs" Line="27" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
